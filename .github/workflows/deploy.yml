@@ -33,7 +33,7 @@ jobs:
 
       - name: 'Set lower case image name'
         run: |
-          echo "REGISTRY_IMAGE=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> ${GITHUB_ENV}
+          echo "REGISTRY_IMAGE=dotnetgw" >> ${GITHUB_ENV}
           echo "SHORT_SHA=${GITHUB_SHA::7}" >> ${GITHUB_ENV}
 
       - name: 'Debug Image Name'
