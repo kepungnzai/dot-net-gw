@@ -44,8 +44,8 @@ jobs:
 
       - name: 'Build and push image'
         run: |
-          docker build . -t ${{ env.CONTAINER_REGISTRY }}/$REGISTRY_IMAGE:$SHORT_SHA
-          docker push ${{ env.CONTAINER_REGISTRY }}/$REGISTRY_IMAGE:$SHORT_SHA
+          docker build . -t ${{ env.CONTAINER_REGISTRY }}/dotnetgw:$SHORT_SHA
+          docker push ${{ env.CONTAINER_REGISTRY }}/dotnetgw:$SHORT_SHA
 
       - name: 'Login to Azure'
         uses: azure/login@v1
