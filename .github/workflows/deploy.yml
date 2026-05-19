@@ -42,10 +42,10 @@ jobs:
           echo "Short SHA: $SHORT_SHA"
           echo "Registry: ${{ env.CONTAINER_REGISTRY }}"
 
-      - name: 'Build and push image'
-        run: |
-          docker build . -t ${{ env.CONTAINER_REGISTRY }}/$REGISTRY_IMAGE:$SHORT_SHA
-          docker push ${{ env.CONTAINER_REGISTRY }}/$REGISTRY_IMAGE:$SHORT_SHA
+      # - name: 'Build and push image'
+      #   run: |
+      #     docker build . -t ${{ env.CONTAINER_REGISTRY }}/$REGISTRY_IMAGE:$SHORT_SHA
+      #     docker push ${{ env.CONTAINER_REGISTRY }}/$REGISTRY_IMAGE:$SHORT_SHA
 
       - name: 'Login to Azure'
         uses: azure/login@v1
