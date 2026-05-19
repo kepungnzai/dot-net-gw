@@ -29,8 +29,15 @@ resource "azurerm_linux_function_app" "fa" {
 
   site_config {
     application_stack {
-      dotnet_version = "6.0"
+      docker {
+        image_name = "placeholder" # This will be updated by the deployment workflow
+        image_tag  = "latest"
+      }
     }
+  }
+
+  app_settings = {
+    "DOCKER_REGISTRY_SERVER_URL" = "https://ghcr.io"
   }
 }
 

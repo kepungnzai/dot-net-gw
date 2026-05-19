@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_NAME: 'your-function-app-name'   # set this to your function app name on Azure
+  AZURE_FUNCTIONAPP_NAME: ${{ secrets.TF_VAR_FUNCTION_APP_NAME }}   # uses the same secret as the infra workflow
   CONTAINER_REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
@@ -32,11 +32,18 @@ jobs:
       - name: 'Set lower case image name'
         run: |
           echo "IMAGE_NAME=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+          echo "SHORT_SHA=${GITHUB_SHA::7}" >> ${GITHUB_ENV}
+
+      - name: 'Debug Image Name'
+        run: |
+          echo "Image Name from env: $IMAGE_NAME"
+          echo "Short SHA: $SHORT_SHA"
+          echo "Registry: ${{ env.CONTAINER_REGISTRY }}"
 
       - name: 'Build and push image'
         run: |
-          docker build . -t ${{ env.CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          docker push ${{ env.CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          docker build . -t ${{ env.CONTAINER_REGISTRY }}/$IMAGE_NAME:$SHORT_SHA
+          docker push ${{ env.CONTAINER_REGISTRY }}/$IMAGE_NAME:$SHORT_SHA
 
       - name: 'Login to Azure'
         uses: azure/login@v1
@@ -49,4 +56,4 @@ jobs:
         uses: azure/functions-action@v1
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          image: ${{ env.CONTAINER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          image: ${{ env.CONTAINER_REGISTRY }}/$IMAGE_NAME:$SHORT_SHA
