@@ -9,7 +9,7 @@ on:
 env:
   AZURE_FUNCTIONAPP_NAME: ${{ secrets.TF_VAR_FUNCTION_APP_NAME }}   # uses the same secret as the infra workflow
   CONTAINER_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/dot-net-gw
+  IMAGE_NAME: ${{ github.repository }}/dotnetgw
 
 jobs:
   build-and-deploy:
