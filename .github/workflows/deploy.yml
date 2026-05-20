@@ -44,8 +44,8 @@ jobs:
 
       - name: 'Build and push image'
         run: |
-          docker build . -t ${{ env.CONTAINER_REGISTRY }}/kepungnzai/dotnetgw:$SHORT_SHA
-          docker push ${{ env.CONTAINER_REGISTRY }}/kepungnzai/dotnetgw:$SHORT_SHA
+          docker build . -t ${{ env.CONTAINER_REGISTRY }}/kepungnzai/dot-netgw:$SHORT_SHA
+          docker push ${{ env.CONTAINER_REGISTRY }}/kepungnzai/dot-netgw:$SHORT_SHA
 
       - name: 'Login to Azure'
         uses: azure/login@v1
@@ -58,4 +58,4 @@ jobs:
         uses: azure/functions-action@v1
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          image: ${{ env.CONTAINER_REGISTRY }}/kepungnzai/dotnetgw:${{ env.SHORT_SHA }}
+          image: ${{ env.CONTAINER_REGISTRY }}/kepungnzai/dot-netgw:${{ env.SHORT_SHA }}
