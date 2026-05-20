@@ -9,7 +9,7 @@ on:
 env:
   AZURE_FUNCTIONAPP_NAME: 'your-function-app-name'   # set this to your function app name on Azure
   CONTAINER_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}/dotnetgw
 
 jobs:
   build-and-deploy:
