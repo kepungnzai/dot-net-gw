@@ -11,6 +11,9 @@ env:
   CONTAINER_REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/dotnetgw
 
+
+
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
